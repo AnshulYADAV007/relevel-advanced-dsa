@@ -1,0 +1,10 @@
+{
+    "car" : "Audi",
+    "models": ["Q7", "Q5"],
+    "launchYear": 2021,
+    "price": [5000000,3500000],
+    "add": {
+        "arg" : "a, b",
+        "body": "return a + b"
+    }
+}
