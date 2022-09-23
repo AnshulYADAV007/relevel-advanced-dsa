@@ -97,3 +97,26 @@ var merge_routine = function(nums1, nums2) {
     
     return answer
 };
+
+/** Merge Intervals https://leetcode.com/problems/merge-intervals/ 
+ * 
+*/
+
+/**
+ * @param {number[][]} intervals
+ * @return {number[][]}
+ */
+ var merge = function(intervals) {
+    intervals.sort((a, b) => a[0] - b[0])
+    
+    const answer = []
+    for(let interval of intervals) {
+        if (answer.length != 0 && answer[answer.length - 1][1] >= interval[0]) {
+            answer[answer.length-1][1] = Math.max(answer[answer.length-1][1],
+                                                 interval[1])
+        } else {
+            answer.push(interval)
+        }
+    }
+    return answer
+};
