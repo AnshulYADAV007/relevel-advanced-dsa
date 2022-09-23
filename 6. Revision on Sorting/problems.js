@@ -120,3 +120,43 @@ var merge_routine = function(nums1, nums2) {
     }
     return answer
 };
+
+/** Find K closest elments https://leetcode.com/problems/find-k-closest-elements/ */
+
+/**
+ * @param {number[]} arr
+ * @param {number} k
+ * @param {number} x
+ * @return {number[]}
+ */
+ var findClosestElements = function(arr, k, x) {
+    let right = getUpperLimit(arr, x)
+    let left = right - 1
+    while (right - left - 1 < k) {
+        if (right >= arr.length) {
+            left--
+        } else if (left < 0) {
+            right++
+        } else if (Math.abs(arr[right] - x) < Math.abs(arr[left] - x)) {
+            right++
+        } else {
+            left--
+        }
+    } 
+    return [...arr.slice(left + 1, right)]
+};
+
+
+const getUpperLimit = function(arr, target) {
+    let lo = 0, hi = arr.length - 1, answer = arr.length
+    while (lo <= hi) {
+        let mid = Math.floor(lo + (hi - lo)/2)
+        if (arr[mid] >= target) {
+            answer = mid
+            hi = mid - 1
+        } else {
+            lo = mid + 1
+        }
+    }
+    return answer
+}
