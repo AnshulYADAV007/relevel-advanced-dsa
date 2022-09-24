@@ -160,3 +160,29 @@ const getUpperLimit = function(arr, target) {
     }
     return answer
 }
+
+/**
+ * Wiggle Sort II - https://leetcode.com/problems/wiggle-sort-ii/
+ */
+
+/**
+ * @param {number[]} nums
+ * @return {void} Do not return anything, modify nums in-place instead.
+ */
+ var wiggleSort = function(nums) {
+    nums.sort((a, b) => a - b) // O(nlog(n))
+    const answer = []
+    let mid = Math.floor((nums.length-1)/2)
+    let left = mid, right = nums.length - 1
+    while (left >= 0) {
+        answer.push(nums[left])
+        left--
+        if(right > mid){
+            answer.push(nums[right])
+            right--
+        }
+    }
+    for(let i = 0; i < nums.length; i++) {
+        nums[i] = answer[i]
+    }
+};
