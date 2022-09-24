@@ -69,3 +69,37 @@
 
     return right - left + 1
 };
+
+/** Optimized Approach */
+
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+ var findUnsortedSubarray = function(nums) {
+    let left = 0, right = 0 
+    
+    for(let i = 0; i < nums.length - 1; i++) {
+        if (nums[i + 1] < nums[i]) {
+            left = i
+            break
+        }
+    }
+    
+    for(let i = nums.length - 1 ; i > 0; i--) {
+        if (nums[i - 1] > nums[i]) {
+            right = i
+            break
+        }
+    }
+    
+    if(left == right) return 0
+    
+    const minimum = Math.min(...nums.slice(left, right + 1))
+    const maximum = Math.max(...nums.slice(left, right + 1))
+    
+    while (left - 1 >= 0 && nums[left - 1] > minimum) left--
+    while (right + 1 < nums.length && nums[right + 1] < maximum) right++
+    
+    return right - left + 1
+};
