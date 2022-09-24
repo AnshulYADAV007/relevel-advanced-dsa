@@ -186,3 +186,33 @@ const getUpperLimit = function(arr, target) {
         nums[i] = answer[i]
     }
 };
+
+/**
+ * Non-overlapping Intervals https://leetcode.com/problems/non-overlapping-intervals/
+ */
+
+/**
+ * @param {number[][]} intervals
+ * @return {number}
+ */
+ var eraseOverlapIntervals = function(intervals) {
+    /**
+    * Find the maximum number of non-overlapping intervals
+    * Substract that number from length of intervals.
+    */
+    if (intervals.length == 0) return 0
+    
+    intervals.sort((a,b) => a[1] - b[1])
+    
+    let end = -100000000, count = 0
+    
+    for(let current of intervals) {
+        if( end <= current[0]) {
+            count++
+            end = current[1]
+        }
+    }
+    
+    return intervals.length - count
+    
+};
