@@ -134,3 +134,27 @@
     return intervals.length - count
     
 };
+
+/**
+ * Minimum number of arrows  https://leetcode.com/problems/minimum-number-of-arrows-to-burst-balloons/
+ */
+
+/**
+ * @param {number[][]} points
+ * @return {number}
+ */
+ var findMinArrowShots = function(points) {
+    const START = 0, END = 1
+    points.sort((a, b) => a[END] - b[END])
+    
+    let lastArrow = points[0][START] - 1, count = 0
+    
+    for(let current of points) {
+        if(current[START] > lastArrow) {
+            lastArrow = current[END]
+            count++
+        }
+    }
+    
+    return count
+};
