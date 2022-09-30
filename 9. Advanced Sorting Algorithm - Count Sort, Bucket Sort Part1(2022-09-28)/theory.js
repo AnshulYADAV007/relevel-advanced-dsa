@@ -26,7 +26,7 @@ const increment = function(freq, num) {
 }
 
 const getArray = function(freq, minElement, maxElement) {
-    const result = []
+    const result = [] 
 
     for(let i = minElement; i<= maxElement; i++){   // O(range + n) 
                                                     // where range = maxElement - minEle + 1
@@ -48,9 +48,9 @@ const nestedLoop = function(n) {
     return count
 }
 
-let nums = [1,4,2,3,1,3,1] 
+let nums = [1,4,-2,3,-1,3,1] 
 let sortedNums = countSort(nums)
-// console.log(`The sorted version of ${nums} is ${sortedNums}`)
+console.log(`The sorted version of ${nums} is ${sortedNums}`)
 
 // for(let i = 0 ; i < 500; i += 10) {
 //     console.log(i, nestedLoop(i))
@@ -104,4 +104,4 @@ const concatenate = function(buckets) {
 nums = [0.24, 0.19, 0.39, 0.34, 0.21, 0.41, 0.82, 0.51, 0.95]
 sortedNums = bucketSort(nums, 10)
 
-console.log(`The bucket sort for ${nums} is ${sortedNums}`)
+// console.log(`The bucket sort for ${nums} is ${sortedNums}`)
