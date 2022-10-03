@@ -69,14 +69,66 @@ class SinglyLinkedList {
         }
     }
 
-
     print() {
         let current = this.head
+        let result = ""
         while (current != null) {
-            console.log(current.data, " -> ")
+            result += `${current.data} -> `
             current = current.next
         }
+        console.log(result)
         console.log(`The length of the linked list is ${this.length}`)
+    }
+
+    printElement(index) {
+        if (index < 0 || index >= this.length) {
+            console.log(`LinkedList index out of bound`)
+        } else {
+            let current = this.head
+            let count = 0
+            while (current) {
+                if (count == index) {
+                    console.log(`The linked list has ${current.data} at index ${index}`)
+                }
+                count++
+                current = current.next
+            }
+        }
+    }
+
+    removeAtStart() {
+        if (this.head == null) {
+            console.log("Linked List already empty!")
+        } else {
+            let temp = this.head
+            this.head = this.head.next
+            temp = null
+            this.length--
+        }
+    }
+
+    removeAt(index) {
+        if (index == 0) this.removeAtStart()
+        else if (index < 0 || index >= this.length) {
+            console.log(`Index for delete out of bound`)
+        } else {
+            let current, previous
+            current = this.head
+
+            // LinkedList Traversal
+            let count = 0
+            while(count < index) {
+                count++
+                previous = current
+                current = current.next
+            }
+            console.log(`The count after loop is ${count}`)
+            // delete current
+            console.log(`Deleting ${current.data}`)
+            previous.next = current.next
+            current = null
+            this.length--
+        }
     }
 }
 
@@ -87,4 +139,10 @@ ll.insertAtEnd(150)
 ll.insertAtEnd(300)
 // 500 -> 100 -> 150 -> 300 -> null
 ll.insertAtIndex(450, 2)
+ll.print()
+ll.printElement(2)
+ll.removeAtStart()
+ll.print()
+// 100 -> 450 -> 150 -> 300 -> null
+ll.removeAt(2)
 ll.print()
