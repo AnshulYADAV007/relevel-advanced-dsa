@@ -78,6 +78,59 @@ class DoublyLinkedList {
         console.log(result + " null")
         console.log(`The length of the doubly linked list is ${this.length}`)
     }
+
+    printElement(index) {
+        if (index < 0 || index >= this.length) {
+            console.log(`LinkedList index out of bound`)
+        } else {
+            let current = this.head
+            let count = 0
+            while (current) {
+                if (count == index) {
+                    console.log(`The linked list has ${current.data} at index ${index}`)
+                }
+                count++
+                current = current.next
+            }
+        }
+    }
+
+    removeAtStart() {
+        if (this.head == null) {
+            console.log("Linked List already empty!")
+        } else {
+            let temp = this.head
+            this.head = this.head.next
+            temp = null
+            this.length--
+            this.head.previous = null
+        }
+    }
+
+    removeAt(index) {
+        if (index == 0) this.removeAtStart()
+        else if (index < 0 || index >= this.length) {
+            console.log(`Index for delete out of bound`)
+        } else {
+            let current, previous
+            current = this.head
+
+            // LinkedList Traversal
+            let count = 0
+            while(count < index) {
+                count++
+                previous = current
+                current = current.next
+            }
+            console.log(`The count after loop is ${count}`)
+            // delete current
+            console.log(`Deleting ${current.data}`)
+            previous.next = current.next
+            current.next.previous = previous
+            current = null
+            this.length--
+        }
+    }
 }
 
 const dll = new DoublyLinkedList()
@@ -91,3 +144,10 @@ dll.insertAtEnd(250)
 dll.insertAtIndex(101, 3)
 // 450 - 300 - 200 - 101 - 100 - 320 - 250
 dll.print()
+dll.printElement(3)
+dll.removeAtStart()
+dll.print()
+// 300 - 200 - 101 - 100 - 320 - 250
+dll.removeAt(2)
+dll.print()
+// 
