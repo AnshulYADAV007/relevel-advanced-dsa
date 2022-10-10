@@ -113,7 +113,7 @@ var mergeTwoLists = function(list1, list2) {
 
 /**
  * Sort List
- * https://leetcode.com/problems/sort-list/description/
+ * https://leetcode.com/probl
  */
 
 /**
