@@ -12,6 +12,16 @@ class SinglyLinkedList {
         this.length = 0
     }
 
+    updateLength() {
+        let cur = this.head
+        let count = 0
+        while(cur != null) {
+            cur = cur.next
+            count++
+        }
+        this.length = count
+    }
+
     getLength() {
         return this.length
     }
@@ -73,7 +83,8 @@ class SinglyLinkedList {
     print() {
         let current = this.head
         let result = ""
-        while (current != null) {
+        let count = 0
+        while (current != null && count++ < 4 * this.length) {
             result += `${current.data} -> `
             current = current.next
         }
