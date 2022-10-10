@@ -12,6 +12,10 @@ class SinglyLinkedList {
         this.length = 0
     }
 
+    getLength() {
+        return this.length
+    }
+
     gethead() {
         return this.head
     }
@@ -26,8 +30,7 @@ class SinglyLinkedList {
         this.length++
     }
 
-    insertAtEnd(data) {
-        let newNode = new Node(data)
+    insertAtEnd(newNode) {
 
         if (this.head == null) {
             this.head = newNode
@@ -44,13 +47,11 @@ class SinglyLinkedList {
         }
     }
 
-    insertAtIndex(data, index) {
-        if (index == 0) this.insertAtStart(data)
+    insertAtIndex(newNode, index) {
+        if (index == 0) this.insertAtStart(newNode)
         else if (index < 0 || index >= this.length) {
             console.log("LinkedList index out of bounds!")
         } else {
-            // 1. Define a new node
-            let newNode = new Node(data)
 
             // 2. Traverse till index - 1
             let current, previous
