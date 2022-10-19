@@ -26,6 +26,11 @@ class Stack{
         if (this.isEmpty()) return null;
         return this.data.at(-1)
     }
+
+    print() {
+        console.log(`The data in the stack is`,
+                    this.data)
+    }
 }
 
 

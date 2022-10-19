@@ -138,7 +138,7 @@ let getSubarrayMinimums2 = function(nums) {
     return getSum(nums, nse, pse)
 }
 
-console.log(`The sum of subarray minimums for ${nums} is ${getSubarrayMinimums2(nums)}`)
+// console.log(`The sum of subarray minimums for ${nums} is ${getSubarrayMinimums2(nums)}`)
 
 const getMax = function(hist, nse, pse) {
     let maximum = 0, INDEX = 0
@@ -155,4 +155,38 @@ const getLargestArea = function(hist) {
     return getMax(hist, nse, pse)
 }
 const hist = [6, 2, 5, 4, 5, 1, 6]
-console.log(`The area of the largest rectangle for histogram ${hist} is ${getLargestArea(hist)}`)
+// console.log(`The area of the largest rectangle for histogram ${hist} is ${getLargestArea(hist)}`)
+
+
+/**
+ * Question 5: Maximal Rectangle
+ */
+
+const matrix = [[ 0, 1, 1, 0 ],
+                [ 1, 1, 1, 1 ],
+                [ 1, 1, 1, 1 ],
+                [ 1, 1, 0, 0 ]]
+
+const getPrefixes = function(matrix) {
+    let n = matrix.length, m = matrix[0].length
+    for(let i = 1; i < n; i++) {
+        for(let j = 0; j < m; j++) {
+            if(matrix[i][j] == 1) {
+                matrix[i][j] += matrix[i-1][j]
+            }
+        }
+    }
+    return matrix
+}
+
+const maximalRectangle = function(matrix) {
+    let prefixMatrix = getPrefixes(matrix)
+    let answer = 0
+    for(let row of prefixMatrix) {
+        answer = Math.max(answer, getLargestArea(row))
+    }
+    return answer
+}
+
+console.log("Area of maximum rectangle is ",
+            maximalRectangle(matrix))
