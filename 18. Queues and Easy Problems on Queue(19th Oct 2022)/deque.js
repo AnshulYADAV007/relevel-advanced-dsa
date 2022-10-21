@@ -39,9 +39,25 @@ class Deque{
         return this.rear - this.front
     }
 
+    getFront() {
+        if(this.isEmpty()) return null
+        return this.data[this.front]
+    }
+
+    getRear() {
+        if(this.isEmpty()) return null
+        return this.data[this.rear-1]
+    }
+
+    getData() {
+        const result = []
+        for (let i = this.front; i< this.rear; i++) result.push(this.data[i])
+        return result
+    }
+
     print() {
         console.log(`The data in the queue is`,
-                    this.data,
+                    this.getData(),
                     `The front and rear are`
                     + ` ${this.front}, ${this.rear} `
                     + `The length of the queue is`
@@ -49,16 +65,16 @@ class Deque{
     }
 }
 
-let dq = new Deque()
-dq.addBack(4)
-dq.addBack(6)
-dq.addBack(8)
-dq.print()
-dq.removeFront()
-dq.print()
-dq.addFront(8)
-dq.addFront(10)
-dq.removeBack()
-dq.print()
+// let dq = new Deque()
+// dq.addBack(4)
+// dq.addBack(6)
+// dq.addBack(8)
+// dq.print()
+// dq.removeFront()
+// dq.print()
+// dq.addFront(8)
+// dq.addFront(10)
+// dq.removeBack()
+// dq.print()
 
 module.exports = Deque

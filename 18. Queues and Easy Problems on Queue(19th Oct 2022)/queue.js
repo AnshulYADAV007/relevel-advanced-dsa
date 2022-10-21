@@ -26,12 +26,18 @@ class Queue {
         if(!this.isEmpty()) {
             return this.data[this.front]
         } else {
-            return null
+            return -1
         }
     }
 
     getLength() {
         return this.rear - this.front 
+    }
+
+    getData() {
+        const result = []
+        for (let i = this.front; i< this.rear; i++) result.push(this.data[i])
+        return result
     }
 
     print() {
