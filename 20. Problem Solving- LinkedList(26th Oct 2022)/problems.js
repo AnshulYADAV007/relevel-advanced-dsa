@@ -2,10 +2,10 @@
  * https://leetcode.com/problems/design-skiplist/description/
  */
 
-class Node{
+ class Node{
     constructor(val, levels){
         this.val = val
-        this.levels = new Array(levels).fill(null)
+        this.next = new Array(levels).fill(null)
     }
 }
 
@@ -17,7 +17,7 @@ Skiplist.prototype._iterate = function * (target) {
     let current = this.head
     for(let level = 15; level >= 0; level--) {
         while(true) {
-            let future = current.levels[level]
+            let future = current.next[level]
             if(future != null && future.val < target) {
                 current = future
             } else {
@@ -33,7 +33,13 @@ Skiplist.prototype._iterate = function * (target) {
  * @return {boolean}
  */
 Skiplist.prototype.search = function(target) {
-    
+    let prev = this.head, level = 15
+    let iterator = this._iterate(target)
+    while(level > 0) {
+        [prev, level] = iterator.next().value
+    }
+    let cur = prev.next[0]
+    return cur != null && cur.val == target
 };
 
 /** 
@@ -42,15 +48,15 @@ Skiplist.prototype.search = function(target) {
  */
 Skiplist.prototype.add = function(num) {
     let nodeLevels = Math.floor(
-                Math.min(16, 1/(1- Math.random())))
+                Math.min(16, 1 + Math.log2(1/Math.random())))
 
-    let node = new Node(num, nodeLevels)
+    let newNode = new Node(num, nodeLevels)
 
     for(let [cur, level] of this._iterate(num)) {
         if(level < nodeLevels ) {
-            let next = cur.levels[level]
-            cur.levels[level] = node 
-            node.levels[level] = next
+            let next = cur.next[level]
+            cur.next[level] = newNode 
+            newNode.next[level] = next
         }
     }
 
@@ -61,7 +67,15 @@ Skiplist.prototype.add = function(num) {
  * @return {boolean}
  */
 Skiplist.prototype.erase = function(num) {
-    
+    let result = false
+    for(let [cur, level] of this._iterate(num)) {
+        let candidate = cur.next[level]
+        if(candidate && candidate.val == num){
+            result = true
+            cur.next[level] = candidate.next[level]
+        }
+    }
+    return result
 };
 
 /** 
