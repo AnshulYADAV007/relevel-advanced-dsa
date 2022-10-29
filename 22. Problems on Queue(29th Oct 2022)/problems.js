@@ -86,3 +86,82 @@ LRUCache.prototype.put = function(key, value) {
  * var param_1 = obj.get(key)
  * obj.put(key,value)
  */
+
+
+/**
+ * Generate Binary Numbers - BFS
+ */
+
+const Queue = require("../18. Queues and Easy Problems on Queue(19th Oct 2022)/queue")
+const binaryNumberGenerator = function(n) {
+    let q = new Queue()
+    q.enqueue('1')
+    while (n--) {
+        let cur = q.dequeue()
+        console.log(cur)
+        q.enqueue(cur + '0')
+        q.enqueue(cur + '1')
+    }
+}
+
+// binaryNumberGenerator(10)
+
+/**
+ * Reverse First K Element from Queue
+ */
+const Stack = require("../16. Stacks and Easy Problems on Stacks(14th Oct 2022)/stack")
+const reverseFirstK = function(q, k) {
+    let n = q.getLength()
+
+    if(k > n || k <= 0) return
+
+    let stk = new Stack()
+
+    for(let i = 0; i < k; i++) {
+        stk.push(q.dequeue())
+    }
+
+    for(let i = 0; i < k; i++) {
+        q.enqueue(stk.pop())
+    }
+
+    for(let i = 0; i < n - k; i++) {
+        q.enqueue(q.dequeue())
+    }
+}
+
+// const q = new Queue()
+// for(let i = 0; i < 10; i++) q.enqueue(i)
+// console.log(q.getData())
+// reverseFirstK(q, 5)
+// console.log(q.getData())
+
+/**
+ * Circular Tour
+ */
+const AVAILABLE = 0, NEEDED = 1
+const getStart = function(tour) {
+    const n = tour.length
+    tour = [...tour, ...tour]
+    let start = 0, end = 0, petrol = 0
+
+    while(end < tour.length) {
+        // end = 4, start = 1, petrol = 6
+        petrol += tour[end][AVAILABLE] - tour[end][NEEDED] 
+        end = end + 1
+        // end = 5, start = 1, petrol = 6 + (4 - 6) = 4
+
+        while(petrol < 0) {
+            petrol -= tour[start][AVAILABLE] - tour[start][NEEDED]
+            start = start + 1
+        }
+        // end = 5, start = 1, petrol = 6 + (4 - 6) = 4
+        if(end - start == n) return tour[start] // tour[1] = [6, 5]
+    }
+    
+    return -1
+}
+
+let tour = [[4,6], [6,5], [7,3], [4,5]] // end = 0, start = 0, petrol = 0
+console.log(`The first successful start point for the tour`, tour, `is`,
+            getStart(tour))
