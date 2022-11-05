@@ -6,10 +6,11 @@ let bfs = function(root){
     q.enqueue(root)
     while(!q.isEmpty()) {
         let cur = q.dequeue()
-        console.log(cur.data)
+        process.stdout.write(cur.data + " ")
         if(cur.left != null) q.enqueue(cur.left)
         if(cur.right != null) q.enqueue(cur.right)
     }
+    console.log()
 }
 
 module.exports = bfs
