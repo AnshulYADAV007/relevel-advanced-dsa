@@ -110,3 +110,34 @@ const isBST = function(root, leftlimit = Number.NEGATIVE_INFINITY,
 // console.log(isBST(bst.root))
 // bst.root.right.data = 9
 // console.log(isBST(bst.root))
+
+/**
+ * Question: Get leafs from preorder
+ */
+const preorder = [5,3,2,4,8,7,9]
+/*
+   5
+ 3   8
+2 4 7 9
+*/
+
+const getFirstGreater = function(value, list) {
+    for(let i = 0; i < list.length; i++) {
+        if(list[i] >= value) return i
+    }
+    return list.length
+}
+
+const getleafs = function(preorder, leafs) {
+    if(preorder.length == 1) leafs.push(preorder[0])
+    else if(preorder.length == 0) return
+    else {
+        let root = preorder[0]
+        let rightIndex = getFirstGreater(root, preorder.slice(1)) + 1
+        getleafs(preorder.slice(1,rightIndex), leafs)
+        getleafs(preorder.slice(rightIndex), leafs)
+    }
+}
+let leafs = []
+getleafs(preorder, leafs)
+console.log(`The leafs for the preorder ${preorder} are ${leafs}`)
