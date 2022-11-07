@@ -98,6 +98,16 @@ bst.insert(13)
 // bst.delete(10)
 // console.log(bst.root)
 // console.log(bst.rightView())
+/*
+        10 
+       7   12
+     6   9    14
+    5   8    13 
+          49
+      73      39
+   79   58      14
+  84   66     27
+*/
 
 const isBST = function(root, leftlimit = Number.NEGATIVE_INFINITY, 
                        rightlimit = Number.POSITIVE_INFINITY) {
@@ -138,6 +148,19 @@ const getleafs = function(preorder, leafs) {
         getleafs(preorder.slice(rightIndex), leafs)
     }
 }
-let leafs = []
-getleafs(preorder, leafs)
-console.log(`The leafs for the preorder ${preorder} are ${leafs}`)
+// let leafs = []
+// getleafs(preorder, leafs)
+// console.log(`The leafs for the preorder ${preorder} are ${leafs}`)
+
+let currentSum = 0
+const bstToGst = function(root) {
+    if (root == null) return null
+    root.right = bstToGst(root.right)
+    currentSum += root.data
+    root.data = currentSum
+    root.left = bstToGst(root.left)
+    return root
+}
+
+console.log(`The tree`, bst.root)
+console.log(`After conversion becomes`, bstToGst(bst.root))
