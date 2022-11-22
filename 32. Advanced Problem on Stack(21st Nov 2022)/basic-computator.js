@@ -12,7 +12,7 @@ const operate = function(op, num1, num2) {
         case '+':
             return num1 + num2
         case '-':
-            return num1 - num2
+            return num2 - num1
         case '*':
             return num1 * num2
         case '/':
@@ -34,6 +34,7 @@ const compute = function(expression) {
     let num_stk = []
     let sym_stk = []
     for(let i = 0; i < chars.length; i++) {
+        console.log(sym_stk, num_stk, chars[i])
         if(chars[i] == ' ') continue
         if(chars[i] >= '0' && chars[i] <= '9') {
             let buffer = "";
@@ -66,10 +67,13 @@ const compute = function(expression) {
             sym_stk.push(chars[i])
         }
     }
+    console.log(sym_stk, num_stk)
     while (sym_stk.length > 0) {
         computeOnce(sym_stk, num_stk)
     }
     return num_stk.pop()
 }
 
-console.log(compute("25(2 + 3)*+(1 + 2)32+"))
+console.log(compute("25*4"))
+console.log(compute("25(4)* + 4"))
+console.log(compute("*25(4)"))
