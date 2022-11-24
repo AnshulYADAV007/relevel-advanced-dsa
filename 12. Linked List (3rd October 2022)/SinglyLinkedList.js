@@ -132,17 +132,19 @@ class SinglyLinkedList {
     }
 }
 
-const ll = new SinglyLinkedList()
-ll.insertAtStart(100)
-ll.insertAtStart(500)
-ll.insertAtEnd(150)
-ll.insertAtEnd(300)
-// 500 -> 100 -> 150 -> 300 -> null
-ll.insertAtIndex(450, 2)
-ll.print()
-ll.printElement(2)
-ll.removeAtStart()
-ll.print()
-// 100 -> 450 -> 150 -> 300 -> null
-ll.removeAt(2)
-ll.print()
+// const ll = new SinglyLinkedList()
+// ll.insertAtStart(100)
+// ll.insertAtStart(500)
+// ll.insertAtEnd(150)
+// ll.insertAtEnd(300)
+// // 500 -> 100 -> 150 -> 300 -> null
+// ll.insertAtIndex(450, 2)
+// ll.print()
+// ll.printElement(2)
+// ll.removeAtStart()
+// ll.print()
+// // 100 -> 450 -> 150 -> 300 -> null
+// ll.removeAt(2)
+// ll.print()
+
+module.exports = SinglyLinkedList
